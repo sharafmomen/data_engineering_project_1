@@ -14,5 +14,8 @@ from src.transform import (
 def main():
     top_link_response = extract_from_top_link()
     excel_link = get_excel_link(top_link_response)
-    info = get_info(excel_link)
-    print(info)
+    filter_from, info_df = get_info(excel_link)
+    filtered_df = melt_and_filter_rows(info_df, filter_from)
+
+if __name__ == "__main__":
+    main()
