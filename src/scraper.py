@@ -37,8 +37,5 @@ def get_info(excel_link):
 
     df_quarter = pd.read_excel(stored_excel_file, sheet_name="Quarter", skiprows=4)
     print(df_quarter.head())
-
-top_link_response = extract_from_top_link()
-excel_link = get_excel_link(top_link_response)
-get_info(excel_link)
+    return lowest, df_quarter
 
