@@ -26,3 +26,16 @@ DELIMITER ','
 IGNOREHEADER 1
 CSV;
 ```
+
+## Applications:
+- Reporting:
+    - This is the simplest application for the final Redshift table. Since it's all UPSERTs, 
+- ML/Forecasting:
+    - Since the final table in this project uses upserts to update the final table, it's important to note that there will be information that will be present when it wasn't available, should you use time-lagged variables. In a situation like this, what should follow each ETL run into this final Redshift table is another table (called historical_snapshots) with a snapshot of data available at a particular point in time. This would then be appended to the historical_snapshots table. The Example columns could be:
+        - publish_date, resource, quarter_1_ago, ngls_quarter_2_ago, ..., quarter_n_ago. 
+
+## Alternative Scenarios:
+- Should you want to do both the reporting and feature engineering for forecasting from the same table, you'd have to completely scrap the idea of upserting, and make the journey from S3 to Redshift purely INSERTs. 
+- Reporting:
+    - For the case where you'd want to do reporting, for each year/quarter combination, you'd need to get the latest results. You'd have to RANK and PARTITION by year, quarter and resource in DESC order, then get the values where RANK = 1. 
+    - An alternative is to make the Delta file have ALL the year and quarter values, rather than those are are likely updated - this is paired with INSERTs. This is more storage intensive (both in S3 and Redshift), but the filtering will be easier. Simply report values where etl_date = max(etl_date). 

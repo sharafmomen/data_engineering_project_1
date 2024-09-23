@@ -7,18 +7,24 @@ from src.scraper import (
     get_info
 )
 from src.transform import (
-    retrieve_year_quarter, 
-    melt_df, 
-    filter_df
+    melt_df,
+    clean_df,  
+    add_dates, 
+    save_csv
 )
 
 def main():
     top_link_response = extract_from_top_link()
     excel_link = get_excel_link(top_link_response)
-    filter_from, info_df = get_info(excel_link)
-    melted_df = melt_df(info_df)
-    filtered_df = filter_df(melted_df, filter_from)
-    print(filtered_df)
+    published_date_ts, info_df = get_info(excel_link)
+    final_df = (
+        info_df
+        .pipe(melt_df)
+        .pipe(clean_df)
+        .pipe(add_dates, published_date = published_date_ts)
+    )
+    print(final_df)
+    save_csv(final_df, "submit_csv/")
 
 if __name__ == "__main__":
     main()

@@ -4,11 +4,14 @@ from requests import Response
 from bs4 import BeautifulSoup
 import io
 import re
+import dateutil.parser
 
 def extract_from_top_link() -> Response:
     link = "https://www.gov.uk/government/statistics/oil-and-oil-products-section-3-energy-trends"
     response = requests.get(link)
     return response
+
+
 
 def get_excel_link(response: Response) -> str:
     response = extract_from_top_link()
@@ -22,12 +25,15 @@ def get_excel_link(response: Response) -> str:
 
 def get_info(excel_link):
     response = requests.get(excel_link)
+
+    # getting the dfs
     stored_excel_file = pd.ExcelFile(io.BytesIO(response.content))
-    df_affected_period = pd.read_excel(stored_excel_file, sheet_name="Cover Sheet", skiprows=7, header=None)
-    affected_period_str = df_affected_period.iloc[0,0]
-    quarters_mentioned = re.findall(r"Quarter (\d) (\d{4})", affected_period_str)
-    year_quarter_lst = [(int(y), int(q)) for q, y in quarters_mentioned]
-    lowest = min(year_quarter_lst, key=lambda x: (x[0], x[1]))
+    df_published_info = pd.read_excel(stored_excel_file, sheet_name="Cover Sheet", skiprows=3, header=None)
     df_quarter = pd.read_excel(stored_excel_file, sheet_name="Quarter", skiprows=4)
-    return lowest, df_quarter
+
+    # published date
+    published_date_str = " ".join(df_published_info.iloc[0,0].split("\n")[0].split(" ")[-3:])
+    published_date_ts = dateutil.parser.parse(published_date_str)
+
+    return published_date_ts, df_quarter, 
 
