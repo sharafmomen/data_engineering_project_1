@@ -1,0 +1,11 @@
+2024-09-23 13:57 - ERROR - Error seen: 'str' object has no attribute 'dtype'
+2024-09-23 17:33 - ERROR - Error seen: retrieve_filename() missing 1 required positional argument: 'excel_link'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 38, in main
+    excel_filename = retrieve_filename()
+                     ^^^^^^^^^^^^^^^^^^^
+TypeError: retrieve_filename() missing 1 required positional argument: 'excel_link'
+2024-09-23 17:43 - ERROR - File data seems to have been ingested already
+NoneType: None
+2024-09-23 17:43 - INFO - File data seems to have been ingested already
+2024-09-23 17:45 - INFO - File data seems to have been ingested already

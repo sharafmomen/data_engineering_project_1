@@ -43,3 +43,11 @@ python main.py
 ## Testing
 
 A set of unit tests have been made, which are dedicated to different source scripts. Simply run
+
+## References:
+- https://medium.com/@anastasia.prokaieva/why-anyone-should-know-delta-lake-if-you-work-with-data-b8c1e3636d60
+- https://docs.databricks.com/en/machine-learning/feature-store/time-series.html 
+- https://delta.io/blog/2023-02-01-delta-lake-time-travel/ 
+- https://docs.databricks.com/en/delta/history.html
+- https://community.databricks.com/t5/data-engineering/delta-live-tables-bulk-import-of-historical-data/td-p/8991 
+- https://medium.com/@sentosa/schema-validation-for-a-pandas-data-frame-e452eb3e567e

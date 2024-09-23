@@ -1,4 +1,5 @@
 import pandas as pd 
+import pandera as pa 
 import requests
 from requests import Response
 from bs4 import BeautifulSoup
@@ -29,6 +30,14 @@ def filter_rows(
     filter_from_str = str(filter_from[0]) + " " + str(filter_from[1])
     return value >= filter_from_str
 
+def melt_df(
+    df: pd.DataFrame
+):
+    df.columns = [retrieve_year_quarter(col) for col in df.columns]
+    df_melted = pd.melt(df, id_vars=df.columns[0], var_name="year_quarter", value_name="supply")
+    df_melted = df_melted.rename(columns={df.columns[0]: "resource"})
+    return df_melted
+
 def clean_df(
     df: pd.DataFrame
 ):
@@ -48,31 +57,57 @@ def clean_df(
 
     return clean_df
 
-def melt_df(
-    df: pd.DataFrame
-):
-    df.columns = [retrieve_year_quarter(col) for col in df.columns]
-    df_melted = pd.melt(df, id_vars=df.columns[0], var_name="year_quarter", value_name="supply")
-    df_melted = df_melted.rename(columns={df.columns[0]: "resource"})
-    return df_melted
-
 def add_dates(
     df: pd.DataFrame, 
     published_date: datetime
 ):
-    df["date_published"] = published_date.date()
-    df["date_processed"] = datetime.now()
-    return df
+    dated_df = df.copy()
+    dated_df["date_published"] = str(published_date.date())
+    dated_df["date_processed"] = pd.to_datetime(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    return dated_df
 
-def save_csv(df: pd.DataFrame, location: str = None):
+def add_filename(
+    df: pd.DataFrame, 
+    filename: str
+):
+    f_df = df.copy()
+    f_df["filename"] = filename
+    return f_df
+
+def output_schema_validation(
+    df = pd.DataFrame
+):
+    # order of columns, because pandera doesn't support
+    column_order = ["resource", "supply", "year", "quarter", "date_published", "date_processed", "filename"]
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+
+    # confirm schema
+    schema = pa.DataFrameSchema({
+        "resource": pa.Column(pa.String, nullable=False), 
+        "supply": pa.Column(pa.Float, nullable=True), # Although I saw 0s in there, instead of nulls
+        "year": pa.Column(pa.Int, nullable=False), 
+        "quarter": pa.Column(pa.Int, nullable=False), 
+        "date_published": pa.Column(pa.String, pa.Check.str_matches(r"\d{4}-\d{2}-\d{2}"), nullable=False), 
+        "date_processed": pa.Column(pa.DateTime, nullable=False), 
+        "filename": pa.Column(pa.String, nullable=False)
+    })
+
     try:
-        if location and os.path.isdir(location):  # check if location exists and is a directory
-            df.to_csv(os.path.join(location, "DeltaTable.csv"), index=False)
-            print(f"File saved in {location}")
-            return  
-    except Exception as e:
-        print(f"Error saving to {location}: {e}, so stored in root directory of project")
+        schema.validate(df, lazy=True)
+    except pa.errors.SchemaErrors as e:
+        error_columns = e.failure_cases['column'].unique()
+        raise ValueError(f"Errors seen in {error_columns}")
     
-    # if there's an error or location doesn't exis
-    df.to_csv("DeltaTable.csv", index=False)
+    # confirm correct date format
+    assert df['date_processed'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S') == str(x)).all(), "date_processed incorrect time representation"
+
+def save_csv(
+    df: pd.DataFrame, 
+    location: str = ""
+):
+    try:
+        df.to_csv(f"{location}DeltaTable.csv", index=False)
+    except Exception as e:
+        df.to_csv("DeltaTable.csv", index=False)
+        raise RuntimeError(f"Error saving to {location}: {e}, so stored in root directory of project")
     
