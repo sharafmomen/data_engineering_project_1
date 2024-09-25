@@ -86,7 +86,6 @@ def main():
         # saves to final destination
         save_csv(final_df, csv_location)
     except Exception as e:
-        print(e)
         logging.exception(f"Error seen: {e}")
 
 if __name__ == "__main__":
