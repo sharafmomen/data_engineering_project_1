@@ -1,0 +1,484 @@
+2024-09-24 10:39 - INFO - File data seems to have been ingested already
+2024-09-24 12:34 - INFO - File data seems to have been ingested already
+2024-09-24 12:44 - INFO - File data seems to have been ingested already
+2024-09-24 12:44 - ERROR - Error seen: input excel - resources repeated
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 68, in main
+    input_checks(info_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 68, in input_checks
+    input_duplicate_rows(df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 25, in input_duplicate_rows
+    assert not df.duplicated(subset=[df.columns[0]]).any(), "input excel - resources repeated"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: input excel - resources repeated
+2024-09-24 12:46 - ERROR - Error seen: input excel - resources repeated
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 68, in main
+    input_checks(info_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 69, in input_checks
+    input_duplicate_rows(df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 18, in input_duplicate_rows
+    assert not df.duplicated(subset=[df.columns[0]]).any(), "input excel - resources repeated"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: input excel - resources repeated
+2024-09-24 12:48 - ERROR - Error seen: input excel - resources repeated
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 68, in main
+    input_checks(info_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 69, in input_checks
+    input_duplicate_rows(df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 18, in input_duplicate_rows
+    assert not df.duplicated(subset=[df.columns[0]]).any(), "input excel - resources repeated"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: input excel - resources repeated
+2024-09-24 15:30 - ERROR - Error seen: input excel - unexpected ordering of columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 68, in main
+    input_checks(info_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 68, in input_checks
+    input_temporal_integrity(df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 35, in input_temporal_integrity
+    assert year_quarter_list == sorted(year_quarter_list), "input excel - unexpected ordering of columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: input excel - unexpected ordering of columns
+2024-09-24 15:30 - ERROR - Error seen: input excel - unexpected ordering of columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 68, in main
+    input_checks(info_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 70, in input_checks
+    input_temporal_integrity(df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 37, in input_temporal_integrity
+    assert year_quarter_list == sorted(year_quarter_list), "input excel - unexpected ordering of columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: input excel - unexpected ordering of columns
+2024-09-24 15:48 - INFO - File data seems to have been ingested already2024-09-24 15:57 - ERROR - Error seen: invalid literal for int() with base 10: 'Column1'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 76, in main
+    .pipe(clean_df)
+     ^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6231, in pipe
+    return common.pipe(self, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/common.py", line 502, in pipe
+    return func(obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 67, in clean_df
+    clean_df[["year", "quarter"]] = clean_df["year_quarter"].str.split(" ", expand=True).astype(int)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6643, in astype
+    new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 430, in astype
+    return self.apply(
+           ^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 363, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 758, in astype
+    new_values = astype_array_safe(values, dtype, copy=copy, errors=errors)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 237, in astype_array_safe
+    new_values = astype_array(values, dtype, copy=copy)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 182, in astype_array
+    values = _astype_nansafe(values, dtype, copy=copy)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 133, in _astype_nansafe
+    return arr.astype(dtype, copy=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'Column1'
+2024-09-24 15:58 - ERROR - Error seen: invalid literal for int() with base 10: 'Column1'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 76, in main
+    .pipe(clean_df)
+     ^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6231, in pipe
+    return common.pipe(self, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/common.py", line 502, in pipe
+    return func(obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 69, in clean_df
+    clean_df[["year", "quarter"]] = clean_df["year_quarter"].str.split(" ", expand=True).astype(int)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6643, in astype
+    new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 430, in astype
+    return self.apply(
+           ^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 363, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 758, in astype
+    new_values = astype_array_safe(values, dtype, copy=copy, errors=errors)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 237, in astype_array_safe
+    new_values = astype_array(values, dtype, copy=copy)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 182, in astype_array
+    values = _astype_nansafe(values, dtype, copy=copy)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 133, in _astype_nansafe
+    return arr.astype(dtype, copy=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'Column1'
+2024-09-24 15:59 - ERROR - Error seen: 'NoneType' object has no attribute 'columns'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 74, in main
+    .pipe(extract_pie_df)
+     ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6231, in pipe
+    return common.pipe(self, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/common.py", line 502, in pipe
+    return func(obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 46, in extract_pie_df
+    condition_ffill = df_pie[df_pie.columns[0]].str.contains('|'.join(keywords_for_ffill), case=False, na=False)
+                             ^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'columns'
+2024-09-24 15:59 - ERROR - Error seen: invalid literal for int() with base 10: 'Column1'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 76, in main
+    .pipe(clean_df)
+     ^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6231, in pipe
+    return common.pipe(self, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/common.py", line 502, in pipe
+    return func(obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 70, in clean_df
+    clean_df[["year", "quarter"]] = clean_df["year_quarter"].str.split(" ", expand=True).astype(int)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6643, in astype
+    new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 430, in astype
+    return self.apply(
+           ^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 363, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 758, in astype
+    new_values = astype_array_safe(values, dtype, copy=copy, errors=errors)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 237, in astype_array_safe
+    new_values = astype_array(values, dtype, copy=copy)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 182, in astype_array
+    values = _astype_nansafe(values, dtype, copy=copy)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 133, in _astype_nansafe
+    return arr.astype(dtype, copy=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'Column1'
+2024-09-24 16:00 - ERROR - Error seen: invalid literal for int() with base 10: 'category'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 76, in main
+    .pipe(clean_df)
+     ^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6231, in pipe
+    return common.pipe(self, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/common.py", line 502, in pipe
+    return func(obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 70, in clean_df
+    clean_df[["year", "quarter"]] = clean_df["year_quarter"].str.split(" ", expand=True).astype(int)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6643, in astype
+    new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 430, in astype
+    return self.apply(
+           ^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 363, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 758, in astype
+    new_values = astype_array_safe(values, dtype, copy=copy, errors=errors)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 237, in astype_array_safe
+    new_values = astype_array(values, dtype, copy=copy)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 182, in astype_array
+    values = _astype_nansafe(values, dtype, copy=copy)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 133, in _astype_nansafe
+    return arr.astype(dtype, copy=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'category'
+2024-09-24 18:30 - ERROR - Error seen: invalid literal for int() with base 10: 'category'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 78, in main
+    .pipe(clean_df)
+     ^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6231, in pipe
+    return common.pipe(self, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/common.py", line 502, in pipe
+    return func(obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 70, in clean_df
+    clean_df[["year", "quarter"]] = clean_df["year_quarter"].str.split(" ", expand=True).astype(int)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6643, in astype
+    new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 430, in astype
+    return self.apply(
+           ^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 363, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 758, in astype
+    new_values = astype_array_safe(values, dtype, copy=copy, errors=errors)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 237, in astype_array_safe
+    new_values = astype_array(values, dtype, copy=copy)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 182, in astype_array
+    values = _astype_nansafe(values, dtype, copy=copy)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 133, in _astype_nansafe
+    return arr.astype(dtype, copy=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'category'
+2024-09-24 18:30 - ERROR - Error seen: invalid literal for int() with base 10: 'category'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 78, in main
+    .pipe(clean_df)
+     ^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6231, in pipe
+    return common.pipe(self, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/common.py", line 502, in pipe
+    return func(obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 70, in clean_df
+    clean_df[["year", "quarter"]] = clean_df["year_quarter"].str.split(" ", expand=True).astype(int)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6643, in astype
+    new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 430, in astype
+    return self.apply(
+           ^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 363, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 758, in astype
+    new_values = astype_array_safe(values, dtype, copy=copy, errors=errors)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 237, in astype_array_safe
+    new_values = astype_array(values, dtype, copy=copy)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 182, in astype_array
+    values = _astype_nansafe(values, dtype, copy=copy)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 133, in _astype_nansafe
+    return arr.astype(dtype, copy=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'category'
+2024-09-24 18:35 - ERROR - Error seen: invalid literal for int() with base 10: 'category'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 78, in main
+    .pipe(clean_df)
+     ^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6231, in pipe
+    return common.pipe(self, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/common.py", line 502, in pipe
+    return func(obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 70, in clean_df
+    clean_df[["year", "quarter"]] = clean_df["year_quarter"].str.split(" ", expand=True).astype(int)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6643, in astype
+    new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 430, in astype
+    return self.apply(
+           ^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 363, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 758, in astype
+    new_values = astype_array_safe(values, dtype, copy=copy, errors=errors)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 237, in astype_array_safe
+    new_values = astype_array(values, dtype, copy=copy)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 182, in astype_array
+    values = _astype_nansafe(values, dtype, copy=copy)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/dtypes/astype.py", line 133, in _astype_nansafe
+    return arr.astype(dtype, copy=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'category'
+2024-09-24 18:36 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-24 18:37 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-24 18:40 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-24 18:40 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-24 18:41 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-24 18:41 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-24 18:45 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-24 18:53 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-24 18:55 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-24 22:26 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-24 22:34 - ERROR - Error seen: 'category'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 76, in main
+    .pipe(extract_pie_df)
+     ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6231, in pipe
+    return common.pipe(self, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/common.py", line 502, in pipe
+    return func(obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 57, in extract_pie_df
+    df_pie["category"] = df_pie.apply(nullify_category_if_not_pie) # fix the above - 1
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/frame.py", line 10374, in apply
+    return op.apply().__finalize__(self, method="apply")
+           ^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/apply.py", line 916, in apply
+    return self.apply_standard()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/apply.py", line 1063, in apply_standard
+    results, res_index = self.apply_series_generator()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/apply.py", line 1081, in apply_series_generator
+    results[i] = self.func(v, *self.args, **self.kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 43, in nullify_category_if_not_pie
+    return row["category"]
+           ~~~^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/series.py", line 1121, in __getitem__
+    return self._get_value(key)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/series.py", line 1237, in _get_value
+    loc = self.index.get_loc(label)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 417, in get_loc
+    raise KeyError(key)
+KeyError: 'category'
+2024-09-24 22:36 - ERROR - Error seen: 'category'
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 76, in main
+    .pipe(extract_pie_df)
+     ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/generic.py", line 6231, in pipe
+    return common.pipe(self, func, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/common.py", line 502, in pipe
+    return func(obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 57, in extract_pie_df
+    df_pie["category"] = df_pie.apply(nullify_category_if_not_pie) # fix the above - 1
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/frame.py", line 10374, in apply
+    return op.apply().__finalize__(self, method="apply")
+           ^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/apply.py", line 916, in apply
+    return self.apply_standard()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/apply.py", line 1063, in apply_standard
+    results, res_index = self.apply_series_generator()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/apply.py", line 1081, in apply_series_generator
+    results[i] = self.func(v, *self.args, **self.kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/transform.py", line 43, in nullify_category_if_not_pie
+    return row["category"]
+           ~~~^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/series.py", line 1121, in __getitem__
+    return self._get_value(key)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/series.py", line 1237, in _get_value
+    loc = self.index.get_loc(label)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/venv/lib/python3.12/site-packages/pandas/core/indexes/range.py", line 417, in get_loc
+    raise KeyError(key)
+KeyError: 'category'
+2024-09-24 22:37 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 85, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns

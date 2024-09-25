@@ -1,5 +1,7 @@
 # Structure and Handling of Data in Data Pipelines
 
+Petroineos is a large company with 201 to 500 employees. Likely, the data analysis team is also quite large, where there are sub-teams that focus on specific parts of the Delta Table. Some might focus specifically on exports,  
+
 ## Read Patterns:
 
 ## Write Patterns:

@@ -1,0 +1,22 @@
+2024-09-25 00:29 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 113, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-25 00:30 - ERROR - Error seen: not in correct order or unexpected columns
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 87, in main
+    output_schema_validation(final_df)
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/src/data_integrity.py", line 113, in output_schema_validation
+    assert list(df.columns) == column_order, "not in correct order or unexpected columns"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: not in correct order or unexpected columns
+2024-09-25 04:01 - ERROR - Error seen: get_info() takes from 0 to 1 positional arguments but 2 were given
+Traceback (most recent call last):
+  File "/Users/sharafmomen/Desktop/application_tests/Petroineos/Petroineos_TakeHomeAssessment/main.py", line 63, in main
+    published_date_ts, info_df = get_info(excel_response, "ET_3.1_JUL_24.xlsx")
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: get_info() takes from 0 to 1 positional arguments but 2 were given
