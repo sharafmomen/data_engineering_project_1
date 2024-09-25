@@ -1,43 +1,40 @@
 # Structure and Handling of Data in Data Pipelines
 
-Petroineos is a large company with 201 to 500 employees. Likely, the data analysis team is also quite large, where there are sub-teams that focus on specific parts of the Delta Table. Some might focus specifically on exports,  
+Petroineos is a large company with 201 to 500 employees. Likely, the data analysis team is also quite large, where there are sub-teams that focus on specific parts of the Delta Table. As Delta tables are columnar and make use of parquet files, and are best made use of with Delta Lake, my design sits on these factors. 
 
 ## Read Patterns:
 
+I antitipate that many of the queries will be primarily by time. Therefore, the decision to partition by YEAR and subpartition by QUARTER would help to speed up queries. As different teams will focus on different products (crude oil, ngls) or categories (imports, exports, production), it'll be difficult to partition by any of these without compromising another focus' query speed and efficiency. Additionally, resource and category are low cardinality columns. Columnar storage would not be utilised efficienty if we partitioned by either of these columns. Therefore, I have decided to partition first by a column with a high cardinality - YEAR. 
+
+I do believe there will be queries where filtering is done by category or resource, but since there aren't many values stored in each partition to begin with, filtering should be fairly efficient. This should draw on less resources, as the database engine can scan the content much quicker and return an answer. 
+
+Additionally, there will be read queries that compare the performance of one resource over another, or look 
+crude oil imports as a ratio of overall imports, etc. As this data is available within each partition already, the necessary calculations will be a lot faster and less memory will be used, as data from other partitions won't be needed to complete a single calculation. 
+
 ## Write Patterns:
 
-## Write Concurrency:
+Judging from the contents of the Cover page of the excel workbook, it seems that an update is sent monthly and towards the end of the month as well. There does seem to be variability, so the etl process could run every day during the last 10 days of the month, and I believe there would be new data once every month. Regardless, should there be much more data coming and to prevent issues with high throughput (more in terms of volume than velocity really), I would be making use of batch upserts. What this does is it takes a batch of data, like another delta file, and "merges" or upserts it into the delta table that is within delta. Why my design optimises for this is because not all data will be updated. Updates will likely focus on more recent years and quarters, so the partitioning I've provided will allow only relevant partitions to be accessed to rewrite the contents where applicable. 
+
+## Concurrency:
+
+With YEAR and QUARTER partitioning, as only relevant years will be tapped into, other partitions will be left alone during updates or upserts. This helps to provide more resources for read queries to make use of. There will be less conflicts and less of read and write queries from different teams and pipelines from colliding. 
+
+A note I'd like to make is that I'd have the data pipeline set up to be triggered at night, in order to avoid being at the same time as several write queries during work hours. 
 
 ## Write Deduplication and Upserts:
-- It's important to make use of ELT pipelines, as it allows data to be stored in a data lake (like AWS S3) prior to it being processed more effectively and stored in the final format in a data warehouse (like AWS Redshift). While I aim to create a record of rows that are most relevant in the CSV file, I will create a temporary table of this CSV file in Redshift, and then UPSERT this into the final table. 
-- Details:
-    - Relevant rows in the CSV file, which is based on information in the "Cover Sheet" tab of the excel file, which explains which rows are affected. 
-    - Temporary Redshift table is created based on the CSV file. This table will be truncated (or deleted) at the start of each ETL run, and then filled with the values of a current CSV file. 
-    - The temporary table will then be upserted into the final table via UPDATE and INSERT statements, which prevents duplicates and updates rows. Redshift doesn't have a direct UPSERT option, but since it's columnar and designed for batch processes, two commands like an UPDATE and INSERT statement would be efficient. 
-- The reason I don't directly UPSERT from the CSV file in the S3 file is because that is not an available option. There are also benefits to this approach as well:
-    
-    - Should an error occur in the load into the final Redshift table, there is a temporary table that can be 
-    - If the final Redshift table accidentally got deleted, a python script can easily iterate through the S3 CSV files in the right order (which is why naming convention is important), and continually UPSERT in batches. 
-- A note on locking and 
 
-```SQL
-COPY my_table
-FROM 's3://your-bucket-name/path/to/your-file.csv'
-IAM_ROLE 'arn:aws:iam::your-iam-role-id:role/your-role-name'
-DELIMITER ',' 
-IGNOREHEADER 1
-CSV;
-```
+Given that the data is partitioned by YEAR and QUARTER, duplicates would be caught within each partition itself. If there was a process to keep an eye out for duplicates or remove them, it can be done on the per partition level where necessary. 
 
-## Applications:
-- Reporting:
-    - This is the simplest application for the final Redshift table. Since it's all UPSERTs, 
-- ML/Forecasting:
-    - Since the final table in this project uses upserts to update the final table, it's important to note that there will be information that will be present when it wasn't available, should you use time-lagged variables. In a situation like this, what should follow each ETL run into this final Redshift table is another table (called historical_snapshots) with a snapshot of data available at a particular point in time. This would then be appended to the historical_snapshots table. The Example columns could be:
-        - publish_date, resource, quarter_1_ago, ngls_quarter_2_ago, ..., quarter_n_ago. 
+UPSERTs would only target rows where the values have changed for a particular combination. As updates are primarily within the more recent years, UPSERTs would focus first on the YEAR and QUARTER partitioning, followed by a unique category and resource combination. Only when a combination does not exist will new rows be introduced, which is why UPSERTs are better are strategically introducing new information while handling potential duplications. 
 
-## Alternative Scenarios:
-- Should you want to do both the reporting and feature engineering for forecasting from the same table, you'd have to completely scrap the idea of upserting, and make the journey from S3 to Redshift purely INSERTs. 
-- Reporting:
-    - For the case where you'd want to do reporting, for each year/quarter combination, you'd need to get the latest results. You'd have to RANK and PARTITION by year, quarter and resource in DESC order, then get the values where RANK = 1. 
-    - An alternative is to make the Delta file have ALL the year and quarter values, rather than those are are likely updated - this is paired with INSERTs. This is more storage intensive (both in S3 and Redshift), but the filtering will be easier. Simply report values where etl_date = max(etl_date). 
+## Additional 
+
+### ML/Forecasting:
+One drawback of the delta table and the current structure is that it cannot be used to query data for forecasting effectively, which would be one of the main needs of Petroineos. This is because it would introduce data leakage, or future data to a present situation where that data would not have otherwise been available. 
+
+In a situation like this, you may be able to use the Delta API to read different versions of the table at different times, and join them one by one to a forecasting dataset where the published_date is less than the date the price of a resource that you're trying to forecast for. Maybe, as you use the Delta API, you may be able to take advantage of the YEAR and QUARTER partitioning. 
+
+An easier and alternative scenario would be to take a snapshot and store it in another table, like on Redshift, which captures historical data well. This would be an INSERT, over the UPSERT mentioned above, but would allow for query performance increase as well, as everyone's query needs will be better distributed between a delta table and a redshift (or another delta) table. 
+
+### Z-Ordering
+To further utilise Delta Lake's features, alongside partitioning on YEAR and QUARTER, z-ordering can be used to order certain values in the rows in every partition based on what is accessed more often. This will quicken queries and reduce query time and increase query efficiency.  
