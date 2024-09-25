@@ -71,8 +71,15 @@ At the moment, there should be 50 tests overall within the tests folder.
 
 ## AI Assisted Code:
 ```
-1. df['date_processed'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S') == str(x)).all() (help with the general lambda function)
-2. "date_published": pa.Column(pa.String, pa.Check.str_matches(r"\d{4}-\d{2}-\d{2}"), nullable=False) (how to use pandera.Check.str_matches)
-2. error_columns = e.failure_cases['column'].unique() (wasn't able to find anywhere how to draw on columns for ONLY pinpointing problem columns in Pandera - for debugging)
-3. mock_get.return_value.status_code = status_code (learning how to mock requests for unit testing)
+1. df['date_processed'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S') == str(x)).all() 
+(help with the general lambda function)
+
+2. "date_published": pa.Column(pa.String, pa.Check.str_matches(r"\d{4}-\d{2}-\d{2}"), nullable=False) 
+(how to use pandera.Check.str_matches)
+
+3. error_columns = e.failure_cases['column'].unique() 
+(wasn't able to find anywhere how to draw on columns for ONLY pinpointing problem columns in Pandera - for debugging)
+
+4. mock_get.return_value.status_code = status_code 
+(learning how to mock requests for unit testing)
 ```
