@@ -1,8 +1,8 @@
-# Petroineos_TakeHomeAssessment
+# Data Engineering - Project 1
 
 ## Aim
 
-The aim for this assessment is to create a data pipeline that will check daily whether there is a new excel file for a particular categery of datasets, and if there's a new file, extract the information of economic indicators around resource and energy use (product, import, export, etc.). Then, I have to store it in a schema and explain the choice behind my design, and how I would structure the final Delta table. 
+The aim for this project is to create a data pipeline that will check daily whether there is a new excel file for a particular categery of datasets, and if there's a new file, extract the information of economic indicators around resource and energy use (product, import, export, etc.). Then, I will store it in a schema and explain the choice behind my design, and how I would structure the final Delta table. The purpose for this project is to show my data engineering capabilities for companies interested in commodities, with a focus on extraction, schema design, and ensuring continued reliability. 
 
 ## What was done:
 
