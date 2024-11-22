@@ -31,7 +31,7 @@ UPSERTs would only target rows where the values have changed for a particular co
 ## Additional 
 
 ### ML/Forecasting:
-One drawback of the delta table and the current structure is that it cannot be used to query data for forecasting effectively, which would be one of the main needs of Petroineos. This is because it would introduce data leakage, or future data to a present situation where that data would not have otherwise been available. 
+One drawback of the delta table and the current structure is that it cannot be used to query data for forecasting effectively, which would be one of the main needs of energy trading companies. This is because it would introduce data leakage, or future data to a present situation where that data would not have otherwise been available. 
 
 In a situation like this, you may be able to use the Delta API to read different versions of the table at different times, and join them one by one to a forecasting dataset where the published_date is less than the date the price of a resource that you're trying to forecast for. Maybe, as you use the Delta API, you may be able to take advantage of the YEAR and QUARTER partitioning. 
 
