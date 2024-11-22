@@ -34,9 +34,9 @@ Steps:
 
 If you have Python 3.12, simply run the following in the root directory of the project step by step, replacing parts where you see fit:
 ```
-git clone https://github.com/sharafmomen/Petroineos_TakeHomeAssessment.git
+git clone https://github.com/sharafmomen/data_engineering_project_1.git
 
-cd path_to/Petroineos_TakeHomeAssessment
+cd path_to/data_engineering_project_1
 
 python3 -m venv venv
 
@@ -52,7 +52,7 @@ python main.py
 A set of unit tests have been made, which are dedicated to different source scripts. Simply run from root directory of project:
 
 ```
-export PYTHONPATH=$PYTHONPATH:~/Petroineos_TakeHomeAssessment
+export PYTHONPATH=$PYTHONPATH:~/data_engineering_project_1
 
 pytest tests/*.py
 
