@@ -1,6 +1,7 @@
 # Structure and Handling of Data in Data Pipelines
 
-Petroineos is a large company with 201 to 500 employees. Likely, the data analysis team is also quite large, where there are sub-teams that focus on specific parts of the Delta Table. As Delta tables are columnar and make use of parquet files, and are best made use of with Delta Lake, my design sits on these factors. 
+
+Likely, the data analysis team that will use the incoming data will be large, where there are sub-teams that focus on specific parts of the Delta Table. As Delta tables are columnar and make use of parquet files, and are best made use of with Delta Lake, my design sits on these factors. 
 
 ## Read Patterns:
 
